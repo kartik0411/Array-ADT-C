@@ -32,7 +32,7 @@ void set(struct array *arr )
 
 void max(struct array *arr)
 {
-    if(issorted(&arr)==1)
+    if(issorted(arr)==1)
     {
         printf("Maximum element is %d and is at index &d",arr->A[arr->length-1],arr->length);
     }
@@ -53,9 +53,11 @@ void max(struct array *arr)
     printf("Maximum element is %d and is at index %d",max,ind);
     }
 }
+
+
 void min(struct array *arr)
 {
-    if(issorted(&arr)==1)
+    if(issorted(arr)==1)
     {
         printf("Minimum element is %d and is at index 1",arr->A[0]);
     }
@@ -97,6 +99,8 @@ void avg(struct array *arr)
     }
     printf("\n\nThe average of all elements of the array is %f",(float)sum/(arr->length));
 }
+
+
 void init(struct array *arr)
 {
     int i=0;
@@ -144,8 +148,6 @@ void insert(struct array *arr)
         printf("\nArray size full!!!!!!");
     }
 }
-
-
 
 
 void append(struct array *arr)
@@ -379,6 +381,8 @@ void arrangeneg(struct array *arr)
         }
     }
 }
+
+
 int main()
 {
     struct array arr;
