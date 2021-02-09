@@ -1,12 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-
 struct array{
     int *A;
     int size;
     int length;
-
 };
 
 void get(struct array *arr )
@@ -36,7 +34,6 @@ void max(struct array *arr)
     {
         printf("Maximum element is %d and is at index &d",arr->A[arr->length-1],arr->length);
     }
-
 
     else
     {
