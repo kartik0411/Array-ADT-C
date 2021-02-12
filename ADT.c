@@ -51,7 +51,6 @@ void max(struct array *arr)
     }
 }
 
-
 void min(struct array *arr)
 {
     if(issorted(arr)==1)
