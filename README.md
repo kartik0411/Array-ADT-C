@@ -1,2 +1,2 @@
-# Array-ADT
-Its a Menu Driven program in which you can do many operations on an array you created
+# DSA PROGRAMS
+Here i save all the DSA objective oriented programs that i practice
