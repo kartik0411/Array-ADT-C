@@ -87,36 +87,43 @@ int main()
     scanf("%d",&m);
 
 
-    if(m==1)
+    switch(m)
     {
-        create(&diag);
+        case 1:  create(&diag); break;
+
+
+        case 2:
+            {
+                printf("\nEnter values of row and column of the element you wanna insert :");
+                scanf("%d%d",&i,&j);
+                int val;
+                printf("\nEnter the value of the element :");
+                scanf("%d",&val); //storing the value that the user wanna set at a specific index to send this as a parameter
+                set(&diag,i,j,val);
+                break;
+            }
+
+
+
+        case 3:
+            {
+                printf("\nEnter the values of row and column of element you wanna get :");
+                scanf("%d%d",&i,&j);
+                printf("\nThe element at index %d,%d is %d",i,j,get(diag,i,j));
+                break;
+            }
+
+
+
+        case 4:
+            {
+                display(diag);
+                break;
+            }
     }
 
+    }while(m!=5);//menu will be shown again and again until user selects EXIT option of the menu
 
-    else if(m==2)
-    {
-        printf("\nEnter values of row and column of the element you wanna insert :");
-        scanf("%d%d",&i,&j);
-        int val;
-        printf("\nEnter the value of the element :");
-        scanf("%d",&val); //storing the value that the user wanna set at a specific index to send this as a parameter
-        set(&diag,i,j,val);
-    }
-
-
-    else if(m==3)
-    {
-        printf("\nEnter the values of row and column of element you wanna get :");
-        scanf("%d%d",&i,&j);
-        printf("\nThe element at index %d,%d is %d",i,j,get(diag,i,j));
-    }
-
-
-    else if(m==4)
-    {
-        display(diag);
-    }
-    }while(m!=5); //menu will be shown again and again until user selects EXIT option of the menu
 
     return 0;
 }
