@@ -7,6 +7,7 @@ using namespace std;
 int k; //for checking which matrix has been created by the user
 
 
+
 class matrix{
 
 private:
@@ -14,7 +15,22 @@ private:
     int *A;
 
 public:
-    matrix() //Default constructor gives a default value to create the array and also to allocate memory for the array for different type of special matrices based on the default size
+    matrix(); //Default constructor gives a default value to create the array and also to allocate memory for the array for different type of special matrices based on the default size
+    matrix(int n); //takes matrix size as a parameter and allocates memory for different types of matrices based on the size
+    ~matrix()
+    {
+        delete []A;
+    }
+    void set(int i,int j,int x); //setting the values at a specific index whose position is given as a parameter and also the value that has to be stored at that index
+    int get(int i,int j); //returns the value at a specific index whose position is sent as a parameter
+    void display(); //display the matrix
+
+};
+
+
+
+
+matrix::matrix()
     {
         n=2;
         switch(k)
@@ -27,7 +43,7 @@ public:
             case 6: {A= new int[(2*n)-1]; break;}
         }
     }
-    matrix(int n) //takes matrix size as a parameter and allocates memory for different types of matrices based on the size
+matrix::matrix(int n)
     {
         this->n=n;
         switch(k)
@@ -40,13 +56,9 @@ public:
             case 6: {A= new int[(2*n)-1]; break;}
         }
     }
-    ~matrix()
-    {
-        delete []A;
-    }
 
 
-    void set(int i,int j,int x) //setting the values at a specific index whose position is given as a parameter and also the value that has to be stored at that index
+void matrix::set(int i,int j,int x)
     {
         switch(k)
         {
@@ -116,7 +128,7 @@ public:
             }
         }
     }
-    int get(int i,int j) //returns the value at a specific index whose position is sent as a parameter
+int matrix::get(int i,int j)
     {
         switch(k)
         {
@@ -197,7 +209,7 @@ public:
             }
         }
     }
-    void display() //display the matrix
+void matrix::display()
     {
         for(int i=0;i<n;i++)
         {
@@ -285,8 +297,6 @@ public:
             cout<<endl;
         }
     }
-
-};
 
 
 
