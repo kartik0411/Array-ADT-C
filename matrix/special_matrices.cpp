@@ -7,7 +7,6 @@ using namespace std;
 int k; //for checking which matrix has been created by the user
 
 
-
 class matrix{
 
 private:
@@ -43,6 +42,7 @@ matrix::matrix()
             case 6: {A= new int[(2*n)-1]; break;}
         }
     }
+
 matrix::matrix(int n)
     {
         this->n=n;
@@ -128,6 +128,8 @@ void matrix::set(int i,int j,int x)
             }
         }
     }
+
+
 int matrix::get(int i,int j)
     {
         switch(k)
@@ -209,6 +211,8 @@ int matrix::get(int i,int j)
             }
         }
     }
+
+
 void matrix::display()
     {
         for(int i=0;i<n;i++)
