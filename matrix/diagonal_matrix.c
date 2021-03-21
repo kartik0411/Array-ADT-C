@@ -123,6 +123,8 @@ int main()
     }
 
     }while(m!=5);//menu will be shown again and again until user selects EXIT option of the menu
+    
+    free(diag.A);
 
 
     return 0;
