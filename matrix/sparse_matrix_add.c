@@ -1,5 +1,5 @@
 //IN THIS PROGRAM WE TRY TO STORE SPARSE MATRIX BY STORING ONLY THE NON-ZERO ELEMENTS AS THE (POSITION,ELEMENT) TUPPLE AND AFTER THAT WE ALSO HAVE DONE ADDITION OF 2 SPARSE MATRICES
-
+// NOTE::: While taking input to create a matrix, store the elements in order of their row and column positions. EXAMPLE: For storing elements at positions : (1,1),(2,1),(1,2), First store element at (1,1) then (1,2) and at last (2,1) [order should be mantained]
 #include<stdio.h>
 
 struct element{
