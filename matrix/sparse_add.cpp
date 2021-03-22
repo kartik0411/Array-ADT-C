@@ -14,6 +14,7 @@ public:
 
 
 
+
 class sparse{
 public:
     int m;
@@ -27,7 +28,7 @@ public:
     }
 
 
-    void create()
+    void create() //to initialize the matrix size and count of non zero elements values
     {
         cout<<"Enter the dimension of the sparse matrix you wanna create : ";
         cin>>m>>n;
@@ -35,85 +36,99 @@ public:
         cin>>num;
     }
 
-    void read()//this function is to read non zero elements from the user and store them into an array of tuple(position,element) structures
-    {
-        A=new element[num];
+    friend istream & operator>>(istream &is, sparse &s);
+    friend ostream & operator<<(ostream &os, sparse &s);
+    friend sparse operator+(sparse &mat1,sparse &mat2);
 
-        cout<<"\nEnter the position of the non zero elements and as well the non zero element itself :\n";
-        for(int k=0;k<num;k++)
-        {
-            cout<<"\nEnter for element number "<<k+1<<": ";
-            cin>>A[k].i>>A[k].j>>A[k].x;
-        }
-    }
-
-    void display()
-    {
-        int k=0;
-        for(int a=0;a<m;a++)
-        {
-            for(int b=0;b<n;b++)
-            {
-                if(A[k].i==(a+1) && A[k].j==(b+1))
-                {
-                    cout<<A[k++].x<<" ";
-                }
-                else{
-                    cout<<"0 ";
-                }
-             }
-             cout<<endl;
-        }
-    }
 };
 
 
 
-sparse add(sparse* mat1, sparse* mat2)
+
+istream & operator>>(istream &is, sparse &s)//this function is to read non zero elements from the user and store them into an array of tuple(position,element) order by first row and then column number
+{
+    s.A=new element[s.num];
+
+    cout<<"\nEnter the position of the non zero elements and as well the non zero element itself :\n";
+    for(int k=0;k<s.num;k++)
+    {
+        cout<<"\nEnter for element number "<<k+1<<": ";
+        cin>>s.A[k].i>>s.A[k].j>>s.A[k].x;
+    }
+    return is;
+}
+
+
+
+
+ostream & operator<<(ostream &os, sparse &s) //for displaying the matrix
+{
+    int k=0;
+    for(int a=0;a<s.m;a++)
+    {
+        for(int b=0;b<s.n;b++)
+        {
+            if(s.A[k].i==(a+1) && s.A[k].j==(b+1))
+            {
+                cout<<s.A[k++].x<<" ";
+            }
+            else{
+                cout<<"0 ";
+            }
+        }
+            cout<<endl;
+    }
+        return os;
+}
+
+
+
+
+sparse operator+(sparse &mat1,sparse &mat2) //for adding the 2 matrices
 {
     int k=0,u=0,v=0;
     sparse matrix;
 
-    (mat1->m>mat2->m)?(matrix.m=mat1->m):(matrix.m=mat2->m);
-    (mat1->n>mat2->n)?(matrix.n=mat1->n):(matrix.n=mat2->n);
+    (mat1.m>mat2.m)?(matrix.m=mat1.m):(matrix.m=mat2.m);
+    (mat1.n>mat2.n)?(matrix.n=mat1.n):(matrix.n=mat2.n);
 
-    matrix.A= new element[mat1->num + mat2->num];
+    matrix.A= new element[mat1.num + mat2.num];
 
-    while(u<mat1->num && v<mat2->num)
+    while(u<mat1.num && v<mat2.num)
     {
-        if(mat1->A[u].i<mat2->A[v].i)
+        if(mat1.A[u].i<mat2.A[v].i)
         {
-            matrix.A[k++]=mat1->A[u++];
+            matrix.A[k++]=mat1.A[u++];
         }
-        else if(mat2->A[v].i<mat1->A[u].i)
+        else if(mat2.A[v].i<mat1.A[u].i)
         {
-            matrix.A[k++]=mat2->A[v++];
+            matrix.A[k++]=mat2.A[v++];
         }
         else{ //if row number of the non zero element of both the sparse matrix are equal, we will check the column number then
 
-            if(mat1->A[u].j<mat2->A[v].j)
+            if(mat1.A[u].j<mat2.A[v].j)
             {
-                matrix.A[k++]=mat1->A[u++];
+                matrix.A[k++]=mat1.A[u++];
             }
-            else if(mat2->A[v].j<mat1->A[u].j)
+            else if(mat2.A[v].j<mat1.A[u].j)
             {
-                matrix.A[k++]=mat2->A[v++];
+                matrix.A[k++]=mat2.A[v++];
             }
             else{ //if column number of the non zero element of both the sparse matrix are also equal we would then add the similar position elements of both the matrices and then increment the counter of the array of both the matrices
 
-                matrix.A[k]=mat1->A[u++]; //first matrix element is copied
-                matrix.A[k++].x+=mat2->A[v++].x; //second matrix element is added to it
+                matrix.A[k]=mat1.A[u++]; //first matrix element is copied
+                matrix.A[k++].x+=mat2.A[v++].x; //second matrix element is added to it
             }
         }
     }
 
-    for(;u<mat1->num;u++)
+    for(;u<mat1.num;u++)
     {
-        matrix.A[k++]=mat1->A[u];
+        matrix.A[k++]=mat1.A[u];
     }
-    for(;v<mat2->num;v++)
+    for(;v<mat2.num;v++)
     {
-        matrix.A[k++]=mat2->A[v];
+        matrix.A[k++]=mat2.A[v];
     }
 
     matrix.num=k;
@@ -127,25 +142,24 @@ int main()
 {
 
     sparse mat1;
-    mat1.create();//to initialize the matrix size and count of non zero elements values
-    mat1.read();//to read the non zero elements of the matrix and store it order wise in an array of tuples having element and its position
+    mat1.create();
+    cin>>mat1;
     cout<<"\n\nMTRIX YOU CREATED =\n";
-    mat1.display();
+    cout<<mat1;
 
     printf("\n\n");
 
     sparse mat2;
     mat2.create();
-    mat2.read();
+    cin>>mat2;
     cout<<"\n\nMTRIX YOU CREATED =\n";
-    mat2.display();
+    cout<<mat2;
 
 
-    sparse mat=add(&mat1,&mat2); //calling sparse matrix addition function
+    sparse mat=mat1+mat2; //calling sparse matrix addition function
     cout<<"\n\n\n\nTHE MATRIX CREATED AFTER ADDING BOTH THE MATRICES IS:\n";
-    mat.display();
+    cout<<mat;
     printf("\n\nXXXXXXXXXXXXXXXXXXXXXXX MATRICES ADDED SUCCESSFULLY XXXXXXXXXXXXXXXXXXXXXXX");
 
     return 0;
-
 }
