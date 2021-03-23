@@ -99,7 +99,7 @@ void add(struct polynomial poly1, struct polynomial poly2)
     struct polynomial sum;
     int i,j,k;
     i=j=k=0;
-    sum.A=(struct term*)malloc((poly1.n+poly2.n)*sizeof(struct polynomial));
+    sum.A=(struct term*)malloc((poly1.n+poly2.n)*sizeof(struct term));
 
     while(i<poly1.n && j<poly2.n)
     {
